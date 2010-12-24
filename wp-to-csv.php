@@ -41,6 +41,10 @@ while ($result = mysql_fetch_array($q))
     $old_link = '/'.implode('/', $tree).'/'.$result['ID']."/".$result['post_name'].".html";
 
     $new_link = '/'.str_replace('-', '/', substr($result['post_date'], 0, 10)).'/'.slug($result['post_title']).'/';
-    echo "{$old_link},{$new_link}\n";
+    if (in_array('--full', $argv)) {
+        echo "http://davidcramer.net{$old_link},http://justcramer.com{$new_link}\n";
+    } else {
+        echo "{$old_link},{$new_link}\n";
+    }
 }
 ?>
