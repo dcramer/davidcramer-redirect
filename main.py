@@ -25,15 +25,15 @@ class MainHandler(webapp.RequestHandler):
     def get(self, *args, **kwargs):
         try:
             if not self.request.path:
-                return self.redirect('http://justcramer.com', permanent=True);
+                return self.redirect('http://cramer.io', permanent=True);
             try:
                 result = Redirect.all().filter('origin =', self.request.path).fetch(1)[0]
             except IndexError:
-                return self.redirect('http://justcramer.com', permanent=True);
-            return self.redirect('http://justcramer.com%s' % result.dest, permanent=True)
+                return self.redirect('http://cramer.io', permanent=True);
+            return self.redirect('http://cramer.io%s' % result.dest, permanent=True)
         except Exception, e:
             logging.error(e)
-            return self.redirect('http://justcramer.com', permanent=True);
+            return self.redirect('http://cramer.io', permanent=True);
 
 def main():
     application = webapp.WSGIApplication([('/.*', MainHandler)],
